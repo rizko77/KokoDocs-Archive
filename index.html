@@ -2,9 +2,45 @@
 <html lang="id">
 
 <head>
+    <!-- Meta Tags Standar -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KokoDocs</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon"> <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"> <!-- Favicon SEO Google-->
+
+    <!-- Meta Tags SEO Google -->
+    <meta name="description" content="KokoDocs adalah tempat di mana Anda dapat menemukan dokumentasi, tutorial, dan kode untuk berbagai proyek teknologi yang pernah dibuat.">
+    <meta name="keywords" content="KokoDocs, Rizko Imsar, AI Chat, YouTube Converter, Chrome Extension, Web Tools, AI Tools, Technology, Programming, Coding, Tutorial, Documentation">
+    <meta name="author" content="Rizko Imsar">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="YKjF4Dc_nsoGDMV4hqcosNcx52Ai_ctBmt0GU3OIVSs" /> <!-- Tidak Diizinkan Mengubah -->
+
+    <!-- Canonical Tag (Mencegah Duplikasi Konten) -->
+    <link rel="canonical" href="https://kokodocs.netlify.app/">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="KokoDocs">
+    <meta property="og:description" content="KokoDocs adalah platform dokumentasi coding dan tutorial teknologi.">
+    <meta property="og:image" content="https://kokodocs.netlify.app/img/thumnail.jpg">
+    <meta property="og:url" content="https://kokodocs.netlify.app">
+
+    <!-- Schema.org Structured Data untuk Google -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "KokoDocs",
+          "url": "https://kokodocs.netlify.app/",
+          "description": "KokoDocs adalah platform digital oleh Rizko Imsar yang menyediakan AI Chat, YouTube Converter, dan ekstensi Chrome.",
+          "sameAs": [
+            "https://github.com/rizko77",
+            "https://instagram.com/rizkoimsar_"
+          ]
+        }
+        </script>
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -103,16 +139,16 @@
             margin-right: 20px;
         }
     </style>
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
 
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(90deg, rgba(24, 22, 34, 0.7), rgba(51, 53, 85, 0.7));">
+
         <div class="container">
             <!-- Brand (Logo) di kiri -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <img src="img/logo.png" alt="KokoDocs Logo" width="40" height="40"> <b>KokoDocs</b>
             </a>
     
@@ -126,7 +162,7 @@
                 
                 <!-- Menu Tengah -->
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     
                     <!-- Product Menu dengan dropdown -->
                     <li class="nav-item dropdown">
@@ -162,7 +198,7 @@
                 </ul>
     
                 <!-- Tombol Get Started di kanan -->
-                <a href="get-started.html" class="btn btn-primary">Get Started</a>
+                <a href="index.html" class="btn btn-primary">Get Started</a>
             </div>
         </div>
     </nav>
@@ -175,7 +211,7 @@
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link text-dark" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="index.html">Home</a></li>
                 
                 <!-- Product Menu Mobile -->
                 <li class="nav-item dropdown">
@@ -212,7 +248,7 @@
 
             <!-- Tombol Get Started di Mobile -->
             <div class="mt-3">
-                <a href="get-started.html" class="btn btn-primary w-100">Get Started</a>
+                <a href="index.html" class="btn btn-primary w-100">Get Started</a>
             </div>
         </div>
     </div>
@@ -225,7 +261,7 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="zoom-out">
                     <h1 class="display-4 text-start">Selamat datang di KokoDocs</h1>
                     <p class="lead text-start">Temukan produk dan platform terbaik untuk kebutuhan Anda.</p>
-                    <a href="#about" class="btn btn-get-started">Get Started</a>
+                    <p class="text-start">KokoDocs adalah tempat di mana Anda dapat menemukan dokumentasi, tutorial, dan kode untuk berbagai proyek teknologi yang pernah dibuat.</p>
                 </div>
                 <div class="col-lg-6 hero-img d-none d-lg-block" data-aos="zoom-out" data-aos-delay="200">
                     <img src="img/hero-img.png" class="img-fluid" alt="Hero Image">
@@ -236,6 +272,7 @@
                 </div>
             </div>
         </div>
+        
     </section>
 
     <!-- Clients Section -->
@@ -266,7 +303,6 @@
             </div>
         </div>
     </section>
-
 
     <footer class="bg-dark text-white text-center py-4">
         <p>© Copyright 2021 - 2025, All Rights Reserved</p>
