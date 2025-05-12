@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KokoDocs</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon"> <!-- Favicon -->
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"> <!-- Favicon SEO Google-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      background-color: #e3f2ff;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #27414b;
+      color: white;
+      padding: 1.5rem 1rem;
+    }
+    .sidebar a {
+      color: white;
+      display: block;
+      margin: 0.75rem 0;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    .content {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+    .preview {
+      max-height: 400px;
+      overflow: auto;
+      background: #000000;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      margin-top: 1rem;
+    }
+    .table-bg {
+      background-color: #1b1838;
+      color: #e3f2ff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a class="navbar-brand" href="index.html">
+                <img src="img/logo.png" alt="KokoDocs Logo" width="40" height="40"> <b>KokoDocs</b>
+            </a>
+    <hr style="border-color: #6c757d;">
+    <a href="file.html">File Manager</a>
+    <a href="index.html">Back</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Daftar File Publik</h2>
+    <input type="text" id="searchInput" class="form-control my-3" placeholder="Cari file..."/>
+
+    <table class="table table-bordered">
+      <thead class="table-bg">
+        <tr>
+          <th>Nama File</th>
+          <th>Aksi</th>
+          <th>Copy Link</th>
+        </tr>
+      </thead>
+      <tbody id="fileList">
+        <!-- Diisi manual atau lewat JavaScript -->
+      </tbody>
+    </table>
+
+    <div id="previewArea" class="preview d-none"></div>
+  </div>
+
+  <!-- Modal Preview -->
+  <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="previewModalLabel">Preview File</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body" id="modalPreviewContent">
+          <!-- Konten preview akan dimuat via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+    const fileArray = [
+      "Ketiak Seia.jpeg",
+      "Library CodeIgniter 4 Canggih.pdf",
+      "Library Laravel 11 Canggih.pdf",
+      "Library Python 3 Canggih.pdf",
+      "Tutorial CodeIgniter 4.pdf",
+      "Tutorial Laravel 11.pdf",
+      "Free CRUD SQLite3.rar",
+      "PhpSpreadsheet-master.zip",
+      "google-api-php-client-main.zip",
+      "Ketek Cewek Enak Hah AH"
+      // Tambah file baru di sini aja
+    ];
+
+    function getFileType(name) {
+      const ext = name.split('.').pop().toLowerCase();
+      if (["jpg", "jpeg", "png", "gif"].includes(ext)) return "Image";
+      if (["rar", "zip", "tar"].includes(ext)) return "Archive";
+      if (ext === "pdf") return "PDF";
+      if (ext === "txt") return "Text";
+      return "Unknown";
+    }
+
+    function renderFileList() {
+      const tbody = document.getElementById("fileList");
+      tbody.innerHTML = ""; // kosongkan dulu
+
+      fileArray.forEach(fileName => {
+        const type = getFileType(fileName);
+        const filePath = "f/" + fileName;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${fileName}</td>
+          <td>
+            <a href="${filePath}" class="btn btn-sm btn-primary target="_blank" download>Download</a>
+            <button class="btn btn-sm btn-info" onclick="showPreview('${filePath}', '${type}')">Detail</button>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-secondary" onclick="copyLink('${filePath}')">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function showPreview(url, type) {
+    const modalContent = document.getElementById("modalPreviewContent");
+    let content = "";
+
+    if (type === "PDF") {
+      content = `<embed src="${url}" type="application/pdf" width="100%" height="600px"/>`;
+    } else if (type === "Image") {
+      content = `<img src="${url}" class="img-fluid" alt="preview"/>`;
+    } else if (type === "Text") {
+      fetch(url).then(res => res.text()).then(text => {
+        modalContent.innerHTML = `<pre>${text}</pre>`;
+        const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+        previewModal.show();
+      });
+      return;
+    } else {
+      content = `<p>Preview tidak tersedia untuk tipe ini.</p>`;
+    }
+
+    modalContent.innerHTML = content;
+    const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+    previewModal.show();
+  }
+
+
+    function copyLink(filePath) {
+      const fullUrl = location.origin + '/' + filePath;
+      navigator.clipboard.writeText(fullUrl)
+        .then(() => alert("Link disalin: " + fullUrl))
+        .catch(() => alert("Gagal menyalin link."));
+    }
+
+    // Jalankan saat halaman selesai dimuat
+    document.addEventListener("DOMContentLoaded", renderFileList);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /file.html
+Disallow: /about.html
+
+Sitemap: https://kokodocs.netlify.app/sitemap.xml
+
